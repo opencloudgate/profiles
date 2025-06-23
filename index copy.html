@@ -240,9 +240,16 @@
             localStorage.setItem('mySavedHtml', content);
             //alert('HTML content saved!');
 
-            var github = new GitHub({
-                token: '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'
-            });
+           // var github = new GitHub({
+               // token: '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'
+            //});
+
+            var github = new Github({
+  username: 'opencloudgate',
+  password: 'Micrubel@123',
+  auth: 'basic'
+});
+ 
             var repository = github.getRepo('opencloudgate', 'profiles');
 
             var htmlContent = content; // Your HTML code from a variable
