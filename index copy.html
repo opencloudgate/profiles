@@ -240,15 +240,10 @@
             localStorage.setItem('mySavedHtml', content);
             alert('HTML content saved!');
 
-           // var github = new GitHub({
-               // token: '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'
-            //});
-
             var github = new GitHub({
-               username: 'opencloudgate',
-               password: 'Micrubel@123',
-               auth: 'basic'
+                token: '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'
             });
+
  
             var repository = github.getRepo('opencloudgate', 'profiles');
 
@@ -256,7 +251,7 @@
 
             repository.writeFile(
                 'main', // Branch name
-                '/profiles/home.html', // File path in the repository
+                '/profiles/test.html', // File path in the repository
                 htmlContent, // The content to write
                 'Commit message: Added HTML file from JavaScript', // Commit message
                 function (err) {
