@@ -245,40 +245,26 @@
             var htmlContent = content; // Your HTML code from a variable
             const pat = process.env.api_pat;
             
-            const owner = 'opencloudgate';
-            const repo = 'profiles';
-            const filePath = 'home.html';
-            const token = pat;
-            const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${filePath}`;
-            
-            // Data for the PUT request (including content, message, and SHA)
-            const requestData = {
-              message: 'Update home.html',
-              content: btoa(htmlContent), // Base64 encoded content
-              sha: 'EXISTING_FILE_SHA', // Required for updating an existing file
-            };
-            
-            fetch(apiUrl, {
-              method: 'PUT',
-              headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `token ${token}`, // Add the Authorization header
-                'Accept': 'application/vnd.github.v3+json',
-              },
-              body: JSON.stringify(requestData),
-            })
-            .then(response => {
-              if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-              }
-              return response.json();
-            })
-            .then(data => {
-              console.log('File updated successfully:', data);
-            })
-            .catch(error => {
-              console.error('Error updating file:', error);
+            var github = new GitHub({
+                token: pat
             });
+
+ 
+            var repository = github.getRepo('opencloudgate', 'profiles');
+
+            repository.writeFile(
+                'main', // Branch name
+                'home.html', // File path in the repository
+                htmlContent, // The content to write
+                'Commit message: Added HTML file from JavaScript', // Commit message
+                function (err) {
+                    if (err) {
+                        console.error('Error saving to GitHub:', err);
+                    } else {
+                        console.log('HTML saved to GitHub successfully!');
+                    }
+                }
+            );
 
         }
 
