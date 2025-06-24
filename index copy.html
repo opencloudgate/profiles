@@ -240,7 +240,7 @@
             localStorage.setItem('mySavedHtml', content);
             alert('HTML content saved!');
 
-            const pat = process.env.API_PAT;
+            const pat = process.env.api_pat;
             var github = new GitHub({
                 token: pat;
             });
