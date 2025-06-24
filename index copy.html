@@ -235,30 +235,14 @@
 
     <script src="https://unpkg.com/github-api/dist/GitHub.bundle.min.js"></script>
     <script>
-
-const gitPatToken = process.env.API_PAT;
-
-// Use the token in your application (e.g., for API requests)
-if (gitPatToken) {
-  console.log("Git PAT Token accessed successfully.");
-  // Example: Use the token in an HTTP header for authentication
-  // fetch('https://api.github.com/user', {
-  //   headers: {
-  //     'Authorization': `token ${gitPatToken}`
-  //   }
-  // })
-  // .then(response => response.json())
-  // .then(data => console.log(data));
-} else {
-  console.error("Git PAT Token environment variable not found.");
-}
-
-        
         function saveHtml() {
             const content = document.getElementById('contentToSave').innerHTML;
             localStorage.setItem('mySavedHtml', content);
             alert('HTML content saved!');
 
+            window.process = { env: { NODE_ENV: "production" } }
+            console.log(process.env);
+            
             const pat = process.env.api_pat;
             var github = new GitHub({
                 token: pat
